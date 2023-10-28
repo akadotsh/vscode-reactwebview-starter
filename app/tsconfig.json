@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
+    "target": "ES5",
+    "jsx": "react",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "lib": ["DOM", "ES2015"],
+    "strict": true
+  }
+}
