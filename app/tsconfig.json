@@ -4,10 +4,18 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Node",
     "target": "ES5",
-    "jsx": "react",
     "sourceMap": true,
     "experimentalDecorators": true,
-    "lib": ["DOM", "ES2015"],
-    "strict": true
+    "lib": ["DOM", "DOM.Iterable", "ES2015"],
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   }
 }

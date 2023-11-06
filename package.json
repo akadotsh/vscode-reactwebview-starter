@@ -28,7 +28,7 @@
     "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "build": "tsup",
+    "build": "tsup --external vscode",
     "dev": "npm run build --watch",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src --ext ts",
@@ -48,13 +48,12 @@
     "eslint": "^8.50.0",
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5",
     "terser": "^5.22.0",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

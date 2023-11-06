@@ -2,9 +2,11 @@ import React from "react";
 
 const App = () => {
   return (
-    <div className="h-screen bg-red-400">
-      <h1>Generate Ui Components</h1>
-      <button className="bg-purple-400">Generate 🪄</button>
+    <div>
+      <img
+        src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+        width="300"
+      />
     </div>
   );
 };

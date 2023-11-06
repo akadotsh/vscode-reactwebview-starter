@@ -4,7 +4,7 @@ import { getNonce } from "./getNonce";
 export default class PanelClass {
   public static currentPanel: PanelClass | undefined;
 
-  private static readonly viewType = "Ui";
+  private static readonly viewType = "UI";
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
@@ -16,19 +16,15 @@ export default class PanelClass {
       ? vscode.window.activeTextEditor.viewColumn
       : undefined;
 
-    // If we already have a panel, show it.
-    // Otherwise, create a new panel.
     if (PanelClass.currentPanel) {
       PanelClass.currentPanel._panel.reveal(column);
     } else {
-      // ReactPanel.currentPanel = new ReactPanel(extensionPath, column || vscode.ViewColumn.One);
       PanelClass.currentPanel = new PanelClass(
         extContext,
         vscode.ViewColumn.Two
       );
     }
   }
-  //temporarily setting extcontext to any type
   private constructor(
     _extContext: vscode.ExtensionContext,
     column: vscode.ViewColumn
@@ -36,26 +32,20 @@ export default class PanelClass {
     this._extContext = _extContext;
     this._extensionUri = _extContext.extensionUri;
 
-    // Create and show a new webview panel
     this._panel = vscode.window.createWebviewPanel(
       PanelClass.viewType,
-      "Cat Coding",
+      "Webview Panel",
       column,
       {
-        // Enable javascript in the webview
         enableScripts: true,
         localResourceRoots: [this._extensionUri],
       }
     );
 
-    // Set the webview's initial html content
     this._panel.webview.html = this._getHtmlForWebview(this._panel.webview);
 
-    // Listen for when the panel is disposed
-    // This happens when the user closes the panel or when the panel is closed programatically
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
-    //Listen to messages
     this._panel.webview.onDidReceiveMessage(
       async (msg: any) => {
         switch (msg.command) {
@@ -86,7 +76,7 @@ export default class PanelClass {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "app/index.js")
+      vscode.Uri.joinPath(this._extensionUri, "out", "index.js")
     );
 
     const styleUri = webview.asWebviewUri(
@@ -100,7 +90,7 @@ export default class PanelClass {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Panel Title Goes Here</title>
+        <title>Webview Starter</title>
         <link rel="stylesheet" href="${styleUri}">
       </head>
       <body>

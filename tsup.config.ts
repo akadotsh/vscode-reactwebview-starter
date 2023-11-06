@@ -1,11 +1,7 @@
 import { defineConfig } from "tsup";
-
+import path from "path";
 const config = defineConfig({
   entry: ["src/extension.ts"],
-  entryPoints: {
-    "app/index.tsx": "app.js",
-  },
-  format: ["cjs"],
   shims: false,
   dts: false,
   outDir: "out",
@@ -14,14 +10,13 @@ const config = defineConfig({
 
 const appConfig = defineConfig({
   entry: ["app/index.tsx"],
-  entryPoints: {
-    "app/index.tsx": "app.js",
-  },
-  format: ["cjs"],
-  shims: false,
   dts: false,
+  minify: true,
+  bundle: true,
+  sourcemap: true,
   outDir: "out",
-  external: ["vscode", "react", "react-dom"],
+  minifyWhitespace: true,
+  loader: { ".ts": "tsx" },
 });
 
 export default [config, appConfig];
