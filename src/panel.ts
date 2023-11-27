@@ -76,7 +76,7 @@ export default class PanelClass {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "index.js")
+      vscode.Uri.joinPath(this._extensionUri, "out", "webview.js")
     );
 
     const styleUri = webview.asWebviewUri(
@@ -90,6 +90,7 @@ export default class PanelClass {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}';">
         <title>Webview Starter</title>
         <link rel="stylesheet" href="${styleUri}">
       </head>

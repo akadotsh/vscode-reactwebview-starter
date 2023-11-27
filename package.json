@@ -27,9 +27,9 @@
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "build": "tsup --external vscode",
-    "dev": "npm run build --watch",
+    "build": "node ./esbuild.js",
+    "dev": "npm run build",
+    "watch": "node ./esbuild.js --watch",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
@@ -45,14 +45,18 @@
     "@typescript-eslint/parser": "^6.7.3",
     "@vscode/test-electron": "^2.3.4",
     "autoprefixer": "^10.4.16",
+    "esbuild-style-plugin": "^1.6.3",
     "eslint": "^8.50.0",
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
     "terser": "^5.22.0",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "esbuild": "^0.19.8",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
