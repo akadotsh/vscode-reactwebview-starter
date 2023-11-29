@@ -1,3 +1,4 @@
+const { context } = require("esbuild");
 const { build } = require("esbuild");
 const postCssPlugin = require("esbuild-style-plugin");
 
@@ -32,39 +33,22 @@ const webviewConfig = {
   ],
 };
 
-const watchConfig = {
-  watch: {
-    onRebuild(error, result) {
-      console.log("[watch] build started");
-      if (error) {
-        error.errors.forEach((error) =>
-          console.error(
-            `> ${error.location.file}:${error.location.line}:${error.location.column}: error: ${error.text}`
-          )
-        );
-      } else {
-        console.log("[watch] build finished");
-      }
-    },
-  },
-};
-
 (async () => {
   const args = process.argv.slice(2);
   try {
     if (args.includes("--watch")) {
       console.log("[watch] build started");
-      await build({
+      let extensionCtx = await context({
         ...extensionConfig,
-        ...watchConfig,
       });
-      await build({
+      let webviewCtx = await context({
         ...webviewConfig,
-        ...watchConfig,
       });
+
+      await extensionCtx.watch();
+      await webviewCtx.watch();
       console.log("[watch] build finished");
     } else {
-      // Build extension and webview code
       await build(extensionConfig);
       await build(webviewConfig);
     }
